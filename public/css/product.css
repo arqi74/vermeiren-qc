@@ -1,0 +1,26 @@
+.productImage {
+    border-radius: 10px;
+    background: #fff;
+}
+
+.parametryBox {
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.leftCard {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.rightCard {
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 10px;
+    text-align: center;
+    margin-left: 10px;
+}

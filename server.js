@@ -42,7 +42,7 @@ async function run() {
     });
     
     app.get('/product/:productId', async (req, res) => {
-        let id = req.params.productId;
+        let id = parseInt(req.params.productId);
         let data = await db.collection('products').findOne({productId: id});
         let dane = {}
         dane.p = data;
