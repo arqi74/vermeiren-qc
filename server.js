@@ -10,8 +10,8 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use('/images', express.static(path.join(__dirname, './public/img')));
 app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 
 app.use((_req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -31,9 +31,11 @@ const client = new MongoClient(uri, {
 async function run() {
     await client.connect();
     const db = client.db('vermeiren-qc');
-
     app.get('/', (req, res) => {
-        res.render('./view/index.ejs');
+        res.render('index.ejs');
+    });
+    app.get('/search', (req, res) => {
+        res.render('search.ejs');
     });
 }
 
