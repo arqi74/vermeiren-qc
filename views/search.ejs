@@ -22,38 +22,48 @@
         </div>
 
         <div class="row">
-            <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nazwa</th>
-                    <th scope="col">Zdjęcie poglądowe</th>
-                    <th scope="col">Opcja</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Forest 3*</td>
-                    <td></td>
-                    <td>
-                        <a href="/product/1">Wyświetl</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="col-md-9" style="margin-left: auto; margin-right: auto;">
+                <table class="table" id="tabela">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nazwa</th>
+                        <th scope="col">Kategoria</th>
+                        <th scope="col">Opcja</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% for(i=0; i<p.length; i++) { %>
+                            <tr>
+                              <th scope="row"><%=i+1%></th>
+                              <td><%=p[i].name%></td>
+                              <td><%=p[i].category%></td>
+                              <td>
+                                  <a href="<%='/product/'+p[i].productId%>">Wyświetl</a>
+                              </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                  </table>
+            </div>
         </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function search() {
-            let value = ;$("#nazwa").val;
-        }
-    </script>
     <script
     src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
     crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(){
+            $("#nazwa").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#tabela tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 </body>
 </html>

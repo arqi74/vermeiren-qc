@@ -30,12 +30,23 @@ const client = new MongoClient(uri, {
 
 async function run() {
     await client.connect();
-    const db = client.db('vermeiren-qc');
+    const db = client.db('vermerien-qc');
     app.get('/', (req, res) => {
         res.render('index.ejs');
     });
-    app.get('/search', (req, res) => {
-        res.render('search.ejs');
+    app.get('/search', async (req, res) => {
+        let data = await db.collection('products').find({}).toArray();
+        let dane = {};
+        dane.p = data;
+        res.render('search.ejs', dane);
+    });
+    
+    app.get('/product/:productId', async (req, res) => {
+        let id = req.params.productId;
+        let data = await db.collection('products').findOne({productId: id});
+        let dane = {}
+        dane.p = data;
+        res.render('product.ejs', dane);
     });
 }
 
